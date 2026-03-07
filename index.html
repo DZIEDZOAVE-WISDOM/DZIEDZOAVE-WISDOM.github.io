@@ -212,6 +212,42 @@
       letter-spacing: 0.5px;
     }
 
+    .profile-photo-wrap {
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: slideUp 0.8s ease forwards 0.1s;
+    }
+    .profile-photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--gold);
+      box-shadow: 0 8px 30px rgba(44, 24, 16, 0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .profile-photo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 40px rgba(44, 24, 16, 0.25);
+    }
+    /* Placeholder style — remove this block once you add your real photo */
+    .profile-placeholder {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid var(--gold);
+      background: linear-gradient(135deg, var(--cream), var(--tan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      box-shadow: 0 8px 30px rgba(44, 24, 16, 0.15);
+    }
+    .profile-placeholder i {
+      font-size: 4rem;
+      color: var(--warm-brown);
+    }
+
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -461,6 +497,16 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
+      <!-- PROFILE PHOTO: Replace the placeholder div below with this once you have your image:
+           <div class="profile-photo-wrap">
+             <img src="your-photo.jpg" alt="Wisdom Dziedzoave" class="profile-photo" />
+           </div>
+      -->
+      <div class="profile-photo-wrap">
+        <div class="profile-placeholder">
+          <i class="bi bi-person-fill"></i>
+        </div>
+      </div>
       <div class="hero-label">Portfolio</div>
       <h1>Wisdom<br><span>Dziedzoave</span></h1>
       <p class="hero-desc">
