@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wisdom Dziedzoave | Data Analyst</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+  <style>
+    :root {
+      --espresso: #2C1810;
+      --dark-brown: #4E3629;
+      --warm-brown: #8B5A2B;
+      --caramel: #C4874E;
+      --tan: #D2B48C;
+      --cream: #F5E6D0;
+      --light-cream: #FFF8F0;
+      --gold: #D4A054;
+      --gold-light: #E8C88A;
+      --text-primary: #2C1810;
+      --text-secondary: #6B4E3D;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      background-color: var(--light-cream);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(44, 24, 16, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      padding: 0.6rem 0;
+      box-shadow: 0 4px 30px rgba(44, 24, 16, 0.3);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      transition: all 0.3s;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(196, 135, 78, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(139, 90, 43, 0.1) 0%, transparent 50%),
+        linear-gradient(175deg, var(--cream) 0%, var(--light-cream) 40%, #F0DCC4 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 160, 84, 0.08) 0%, transparent 70%);
+      animation: floatOrb 12s ease-in-out infinite;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139, 90, 43, 0.06) 0%, transparent 70%);
+      animation: floatOrb 15s ease-in-out infinite reverse;
+    }
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(30px, -40px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+    .hero-label {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--warm-brown);
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1.5rem;
+      border: 1.5px solid var(--caramel);
+      border-radius: 50px;
+      opacity: 0;
+      animation: slideUp 0.8s ease forwards 0.3s;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 900;
+      color: var(--espresso);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: slideUp 0.8s ease forwards 0.5s;
+    }
+    .hero h1 span {
+      display: block;
+      background: linear-gradient(135deg, var(--warm-brown), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      opacity: 0;
+      animation: slideUp 0.8s ease forwards 0.7s;
+    }
+    .hero-tools {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: slideUp 0.8s ease forwards 0.9s;
+    }
+    .tool-badge {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== SECTION COMMON ===== */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--espresso);
+      margin-bottom: 0.5rem;
+    }
+    .section-header .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--caramel), var(--gold));
+      margin: 1rem auto 0;
+      border-radius: 2px;
+    }
+
+    /* ===== PROJECTS ===== */
+    #projects { background: var(--light-cream); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+    .project-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(44, 24, 16, 0.06);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.4s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(44, 24, 16, 0.12);
+    }
+    .project-img-wrap {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+    .project-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .project-card:hover .project-img-wrap img {
+      transform: scale(1.08);
+    }
+    .project-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44, 24, 16, 0.5) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .project-card:hover .project-img-overlay { opacity: 1; }
+
+    .project-body {
+      padding: 1.5rem;
+    }
+    .project-tools {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.8rem;
+    }
+    .project-tools span {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--warm-brown);
+      background: rgba(196, 135, 78, 0.15);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+    }
+    .project-body h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--espresso);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .project-body p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--warm-brown);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: gap 0.3s, color 0.3s;
+    }
+    .project-link:hover {
+      color: var(--gold);
+      gap: 0.8rem;
+    }
+
+    /* ===== FOOTER / CONTACT ===== */
+    .footer {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 4rem 2rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .footer h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--gold-light);
+    }
+    .footer p {
+      color: rgba(245, 230, 208, 0.8);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      color: rgba(245, 230, 208, 0.8);
+      font-size: 0.95rem;
+    }
+    .contact-item i {
+      font-size: 1.1rem;
+      color: var(--gold);
+      width: 20px;
+      text-align: center;
+    }
+    .contact-item a {
+      color: rgba(245, 230, 208, 0.8);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .contact-item a:hover { color: var(--gold-light); }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(212, 160, 84, 0.4);
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: all 0.3s;
+    }
+    .social-links a:hover {
+      background: var(--gold);
+      color: var(--espresso);
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 3rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(245, 230, 208, 0.1);
+      text-align: center;
+      color: rgba(245, 230, 208, 0.4);
+      font-size: 0.85rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(44, 24, 16, 0.98);
+        padding: 1.5rem 2rem;
+        gap: 1.2rem;
+      }
+      .hamburger { display: flex; }
+      .hero h1 { font-size: 2.2rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">WD</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-label">Portfolio</div>
+      <h1>Wisdom<br><span>Dziedzoave</span></h1>
+      <p class="hero-desc">
+        Data Analyst with a passion for turning raw data into meaningful insights. Proficient in transforming complex datasets into clear, actionable stories.
+      </p>
+      <div class="hero-tools">
+        <span class="tool-badge">Python</span>
+        <span class="tool-badge">Excel</span>
+        <span class="tool-badge">Power BI</span>
+        <span class="tool-badge">SQL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="section">
+      <div class="section-header">
+        <h2>Projects</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="projects-grid" id="projects-container"></div>
+    </div>
+  </section>
+
+  <!-- Footer / Contact -->
+  <footer class="footer" id="contact">
+    <div class="footer-inner">
+      <div>
+        <h3>Let's Connect</h3>
+        <p>I'm always open to discussing data projects, collaboration opportunities, or just chatting about analytics.</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/wisdomd/" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://github.com/DZIEDZOAVE-WISDOM" target="_blank" aria-label="GitHub"><i class="bi bi-github"></i></a>
+          <a href="mailto:dziedzoavew@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
+        </div>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <div class="contact-item"><i class="bi bi-geo-alt-fill"></i><span>Accra, Ghana</span></div>
+        <div class="contact-item"><i class="bi bi-telephone-fill"></i><span>(+233) 545401219</span></div>
+        <div class="contact-item"><i class="bi bi-envelope-fill"></i><a href="mailto:dziedzoavew@gmail.com">dziedzoavew@gmail.com</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Wisdom Dziedzoave. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Projects
+    const projects = [
+      {
+        title: "Movie Analysis",
+        description: "Exploratory Data Analysis on movies released between 1980–2020, uncovering trends in genres, budgets, and audience ratings.",
+        tools: ["Python", "Excel"],
+        image: "https://raw.githubusercontent.com/Folawalker/Movie-Analysis/main/movie%20posters.jpg",
+        link: "https://github.com/Folawalker/Movie-Analysis"
+      },
+      {
+        title: "International Debt Analysis",
+        description: "Exploring patterns and insights in international debt data across countries and indicators.",
+        tools: ["Python", "Excel", "Power BI"],
+        image: "https://github.com/Folawalker/International-Debt/blob/main/bank%20and%20money.jpg?raw=true",
+        link: "https://github.com/Folawalker/International-Debt"
+      },
+      {
+        title: "Global Blood Group Distribution",
+        description: "Analyzing blood group distribution worldwide and its implications for healthcare logistics and emergency planning.",
+        tools: ["Power BI", "Excel", "Python"],
+        image: "https://raw.githubusercontent.com/Folawalker/Blood-Group-Distribution-Analysis/main/Blood%20Cells.jpg",
+        link: "https://github.com/Folawalker/Blood-Group-Distribution-Analysis"
+      },
+      {
+        title: "Marketing Campaign Analysis",
+        description: "Assessing the effectiveness of marketing campaigns to optimize strategy and ROI.",
+        tools: ["Power BI", "Excel"],
+        image: "https://raw.githubusercontent.com/Folawalker/Marketing-Campaign-Analysis/main/marketing%20campaign.jpg",
+        link: "https://github.com/Folawalker/Marketing-Campaign-Analysis"
+      },
+      {
+        title: "Education Data",
+        description: "Identifying key factors that influence students' academic performance using data-driven analysis.",
+        tools: ["Python", "Excel"],
+        image: "https://raw.githubusercontent.com/Folawalker/Education-Data/main/education.jpg",
+        link: "https://github.com/Folawalker/Education-Data"
+      },
+      {
+        title: "Megastore Analysis",
+        description: "Uncovering sales trends and optimizing strategies for revenue growth across store segments.",
+        tools: ["Excel", "Power BI", "SQL"],
+        image: "https://raw.githubusercontent.com/Folawalker/Megastore-Analysis/main/superstore.jpg",
+        link: "https://github.com/Folawalker/Megastore-Analysis"
+      },
+      {
+        title: "Engagement Analysis",
+        description: "Uncovering trends in user submissions to identify what drives community engagement.",
+        tools: ["Python", "Excel"],
+        image: "https://raw.githubusercontent.com/Folawalker/Exploring-Hacker-News-Posts/main/engagement.jpg",
+        link: "https://github.com/Folawalker/Exploring-Hacker-News-Posts"
+      },
+      {
+        title: "Instagram Engagement Analysis",
+        description: "Analysing content strategies that drive up engagement on an Instagram account.",
+        tools: ["Excel", "Python"],
+        image: "https://raw.githubusercontent.com/Folawalker/IG-reach-Analysis-Project/main/Instagram.png",
+        link: "https://github.com/Folawalker/IG-reach-Analysis-Project"
+      },
+      {
+        title: "iPhone Sales Analysis — India (Flipkart)",
+        description: "Studying trends and patterns in iPhone sales on Flipkart in the Indian market.",
+        tools: ["Python", "Excel"],
+        image: "https://raw.githubusercontent.com/Folawalker/iPhone-Sales-Analysis-in-India-on-Flipkart/main/Iphone.jpg",
+        link: "https://github.com/Folawalker/iPhone-Sales-Analysis-in-India-on-Flipkart"
+      }
+    ];
+
+    const container = document.getElementById('projects-container');
+    projects.forEach((project, i) => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.style.transitionDelay = `${i * 0.08}s`;
+      card.innerHTML = `
+        <div class="project-img-wrap">
+          <img src="${project.image}" alt="${project.title}" loading="lazy" />
+          <div class="project-img-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-tools">
+            ${project.tools.map(t => `<span>${t}</span>`).join('')}
+          </div>
+          <h3>${project.title}</h3>
+          <p>${project.description}</p>
+          <a href="${project.link}" class="project-link" target="_blank">
+            View Project <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+
+    // Intersection Observer for card animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.project-card').forEach(card => observer.observe(card));
+  </script>
+</body>
+</html>
