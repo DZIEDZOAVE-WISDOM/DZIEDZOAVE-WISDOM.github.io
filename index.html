@@ -90,6 +90,23 @@
     }
     .nav-links a:hover { color: var(--gold-light); }
     .nav-links a:hover::after { width: 100%; }
+    .cv-btn {
+      background: var(--gold);
+      color: var(--espresso) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 700 !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .cv-btn::after { display: none !important; }
+    .cv-btn:hover {
+      background: var(--gold-light);
+      color: var(--espresso) !important;
+      transform: translateY(-2px);
+    }
 
     .hamburger {
       display: none;
@@ -490,6 +507,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="Wisdom_Dziedzoave_CV.docx.pdf" download class="cv-btn"><i class="bi bi-download"></i> Download CV</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
