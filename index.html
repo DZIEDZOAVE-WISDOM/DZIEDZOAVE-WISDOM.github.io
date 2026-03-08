@@ -60,12 +60,14 @@
       align-items: center;
     }
     .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      font-weight: 700;
+      font-size: 1.5rem;
       color: var(--gold-light);
       text-decoration: none;
-      letter-spacing: 1px;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .nav-logo:hover {
+      color: var(--gold);
+      transform: scale(1.1);
     }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
@@ -531,7 +533,7 @@
   <!-- Navigation -->
   <nav id="navbar">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">WD</a>
+      <a href="#" class="nav-logo"><i class="bi bi-bar-chart-line-fill"></i></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
